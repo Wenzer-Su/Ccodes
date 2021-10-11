@@ -15,7 +15,7 @@ int p_token;            //缓冲区和单词缓冲区的指针
 
 char ch;
 //可扩充的关键字数组
-char *rwtab[]= {"begin","if","then","while","do","end",_KEY_WORD_END};
+char *rwtab[]= {"begin","if","then","while","do","end","else",_KEY_WORD_END};
 
 
 //词法扫描函数，通过此函数获取一个单词
@@ -42,7 +42,7 @@ int main()
         over=oneword->typenum;
     }
     printf("\n press # to exit:");
-    scanf("% [^#]s",input);
+    scanf("%[^#]s",input);
 
     return 0;
 }
