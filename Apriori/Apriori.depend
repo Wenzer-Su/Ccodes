@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1634287804 source:d:\codes\ccodes\apriori\main.cpp
+	<cstdio>
+	<cstdlib>
+	<iostream>
+
