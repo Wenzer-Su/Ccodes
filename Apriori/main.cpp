@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+using namespace std;
 
 typedef struct
 {
@@ -16,31 +18,74 @@ typedef struct
     int item[100]; //数据项,用item[0]保存支持度
 } L_Node;//频繁集
 
-C_Node C[100][100];
-L_Node L[100][100];
-D_Node D[100];
+C_Node C[1000][1000];
+L_Node L[1000][1000];
+D_Node D[1000];
 
 int min_supp; //最小支持度
 
 void InPut()
 {
-    int i,j,n,n1;//n是交易集的大小，n1是输入的记录个数，数据输入到D[100]中
-    printf("最小支持度:");
-    scanf("%d",&min_supp);
-    printf("几条交易记录？");
-    scanf("%d",&D[0].item[0]);
-    n=D[0].item[0];
-    for(i=1; i<=n; i++)
+    //n是交易集的大小，n1是输入的记录个数，数据输入到D[100]中
+    int i,j,k,n,m;
+    cin>>min_supp;
+    cin>>n;
+    D[0].item[0]=n;
+    for (i=1;i<=n;i++)
     {
-        printf("第%d条交易中有几个物品？",i);
-        scanf("%d",&n1);
-        D[i].item[0]=n1;
-        for(j=1; j<=n1; j++)
+        cin>>m;
+        D[i].item[0]=m;
+        for (j=1;j<=m;j++)
         {
-            scanf("%d",&D[i].item[j]);
+            cin>>D[i].item[j];
         }
+    }
+//    int i,j,n,n1;//n是交易集的大小，n1是输入的记录个数，数据输入到D[100]中
+//    printf("最小支持度:");
+//    scanf("%d",&min_supp);
+//    printf("几条交易记录？");
+//    scanf("%d",&D[0].item[0]);
+//    n=D[0].item[0];
+//    for(i=1; i<=n; i++)
+//    {
+//        printf("第%d条交易中有几个物品？",i);
+//        scanf("%d",&n1);
+//        D[i].item[0]=n1;
+//        for(j=1; j<=n1; j++)
+//        {
+//            scanf("%d",&D[i].item[j]);
+//        }
+//
+//    }
+
+    cout<<"事务数量:"<<D[0].item[0]<<endl;
+    for (i=1;i<=n;i++)
+    {
+        cout<<"第"<<i<<"项事务-->记录数量:"<<D[i].item[0]<<"  事务记录:";
+        for (j=1;j<=D[i].item[0];j++)
+        {
+            cout<<D[i].item[j]<<' ';
+        }
+        cout<<endl;
 
     }
+//    int i,j,n,n1;//n是交易集的大小，n1是输入的记录个数，数据输入到D[100]中
+//    printf("最小支持度:");
+//    scanf("%d",&min_supp);
+//    printf("几条交易记录？");
+//    scanf("%d",&D[0].item[0]);
+//    n=D[0].item[0];
+//    for(i=1; i<=n; i++)
+//    {
+//        printf("第%d条交易中有几个物品？",i);
+//        scanf("%d",&n1);
+//        D[i].item[0]=n1;
+//        for(j=1; j<=n1; j++)
+//        {
+//            scanf("%d",&D[i].item[j]);
+//        }
+//
+//    }
 
 }
 //扫描数据集D生成1项候选集C1
@@ -170,26 +215,74 @@ void Ln(int n)
     L[n][0].item[0]=j; //频繁n项集中的记录的个数
 }
 
+void outPutString(int x)
+{
+    switch(x)
+    {
+    case 11:
+        cout<<"Cardiacfailure";
+        break;
+    case 22:
+        cout<<"Myocardialinfarction";
+        break;
+    case 33:
+        cout<<"uremia";
+        break;
+    case 44:
+        cout<<"diabetes";
+        break;
+    case 55:
+        cout<<"Renalfailure";
+        break;
+    case 66:
+        cout<<"Other";
+        break;
+    default:
+        cout<<x;
+
+    }
+    return;
+}
+
 void OutPut(int n)
 {
     int i,j,k;
-
-    k=L[n][0].item[0];//n项频繁集中有k条记录
-    if(k!=0)
+    k=L[n][0].item[0];
+    if (k)
     {
         printf("\n频繁项集L%d如下:\n",n);
-        for(i=1; i<=k; i++)
+        for (i=1;i<=k;i++)
         {
-
-            for(j=1; j<=n; j++) //n项频繁集中每条记录有n个数据项
-                printf(" %d ",L[n][i].item[j]);
-            printf("  支持度:%d\n",L[n][i].item[0]);
-
-        }//for
-
+            cout<<"< ";
+            for (j=1;j<=n;j++)
+            {
+                outPutString(L[n][i].item[j]);
+                cout<<' ';
+            }
+            printf(">  支持度:%d\n",L[n][i].item[0]);
+        }
     }
     else
-        printf("迭代结束\n");
+    {
+        cout<<"迭代结束"<<endl;
+    }
+
+//    k=L[n][0].item[0];//n项频繁集中有k条记录
+//    if(k!=0)
+//    {
+//        printf("\n频繁项集L%d如下:\n",n);
+//        for(i=1; i<=k; i++)
+//        {
+//
+//            for(j=1; j<=n; j++) //n项频繁集中每条记录有n个数据项
+//                printf(" %d ",L[n][i].item[j]);
+//            printf("  支持度:%d\n",L[n][i].item[0]);
+//
+//        }//for
+//
+//    }
+//    else
+//        printf("迭代结束\n");
 }
 
 int main()

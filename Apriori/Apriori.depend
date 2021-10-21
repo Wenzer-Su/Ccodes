@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1634383676 source:d:\codes\ccodes\apriori\main.cpp
+1634704197 source:d:\codes\ccodes\apriori\main.cpp
 	<stdio.h>
 	<stdlib.h>
+	<iostream>
 
